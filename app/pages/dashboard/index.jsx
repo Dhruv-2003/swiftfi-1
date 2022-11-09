@@ -9,13 +9,13 @@ export default function DashboardHome() {
         <div>
             <DashboardLayout>
                 <div className="flex flex-col justify-start pt-20">
-                    <h1 className="text-xl pt-3 md:pt-0 md:text-3xl font-semibold pb-8 text-center">
-                        gm Kushagra!!! welcome to your personalized SwiftFi dashboard 🚀
+                    <h1 className="text-xl pt-3 md:pt-0 md:text-3xl font-semibold pb-8 text-center w-[95%] mx-auto">
+                        gm {`0xA25c5bE1324764573dE0a14ABFe0279B4291adfA`.slice(0, 20)}.... welcome to your personalized SwiftFi dashboard 🚀
                     </h1>
 
                     <div className="">
                         <Card
-                            className={`${styles.profileCard} md:w-[75%] mx-auto transition hover:scale-[1.01] ease-in-out`}
+                            className={`${styles.profileCard} md:w-[75%] mx-auto transition hover:scale-105 ease-in-out`}
                         >
                             <div className="flex flex-col items-center pb-4 ">
                                 <img
