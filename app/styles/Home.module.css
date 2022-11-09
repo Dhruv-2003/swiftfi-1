@@ -24,7 +24,7 @@
   .left {
     margin: 0 25px;
     background-image: url("../assets/hero.gif");
-    background-image: url("../assets/hero2.gif");
+    /* background-image: url("../assets/hero2.gif"); */
     background-size: cover;
     background-position: center;
   }

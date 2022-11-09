@@ -12,7 +12,7 @@ export default function Paylinks() {
     <DashboardLayout>
       <div className="w-[90%] mx-auto pt-20">
         <div className={`${styles.animation} flex flex-col justify-start pt-5`}>
-          <h1 className="text-3xl font-semibold pb-6">
+          <h1 className="text-3xl font-semibold text-center pb-6">
             Create and Manage Payment Links
           </h1>
 
