@@ -22,8 +22,15 @@
   
   .navLink {
     margin: 0 15px;
-    color: #d4d7ff;
+    color: #eff0ff;
     cursor: pointer;
+    border-radius: 5px;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .navLink:hover {
+    background-color: #d4d7ff;
+    color: black;
   }
   
   .logo {
