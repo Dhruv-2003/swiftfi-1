@@ -11,6 +11,7 @@ body {
   font-family: 'PT Sans', sans-serif;
   background-color: #0c0c17;
   color: #eaeeff;
+  scroll-behavior: smooth;
 }
 
 a {

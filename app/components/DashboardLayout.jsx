@@ -6,6 +6,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import logo from "../assets/navLogo.png";
 import Image from "next/image";
 import { useState } from "react";
+import { Card } from "flowbite-react";
 
 const menuItems = [
   {
@@ -89,15 +90,12 @@ export default function DashboardLayout({ children }) {
           <aside
             className={`${
               toggle ? "block" : "hidden"
-            } z-[2] border-r-[0px] md:border-r-[1px] border-[#dff5ff2e] border-0 md:border-[#4a4f92] bg-[#15151f] bg-[#0c0c1712] backdrop-blur-3xl w-full md:w-60 fixed min-h-screen shadow-md`}
+            } scroll-auto z-[2] border-r-[0px] md:border-r-[1px] border-[#dff5ff2e] border-0 md:border-[#4a4f92] bg-[#15151f] bg-[#0c0c1712] backdrop-blur-3xl w-full md:w-72 fixed min-h-screen shadow-md`}
           >
             <nav>
-              <ul className="px-2 pt-[5rem]">
-                <li className="mt-4 mx-2 md:hidden block w-full">
-                  <span className="">
-                    <ConnectButton />
-                  </span>
-                </li>
+
+              <ul className="px-2 md:pt-[6rem] pt-[4rem]">
+                
                 {menuItems.map(({ href, title }) => (
                   <li className="m-2" key={title}>
                     <Link legacyBehavior href={href}>
@@ -111,6 +109,11 @@ export default function DashboardLayout({ children }) {
                     </Link>
                   </li>
                 ))}
+                <li className="mt-5 mx-2 md:hidden block w-full">
+                  <span className="">
+                    <ConnectButton />
+                  </span>
+                </li>
               </ul>
             </nav>
           </aside>
