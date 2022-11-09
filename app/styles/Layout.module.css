@@ -5,15 +5,12 @@
     justify-content: space-between;
     align-content: center;
     flex-wrap: wrap;
-    padding: 0.4rem 2.5rem;
-    background-color: #080426;
-    color: white;
+    padding: 0rem 2.5rem;
     position: fixed;
     width: 100%;
     border-bottom: 1px solid #4a4f92;
-
-    background-color: #0c0c1764;
     backdrop-filter: blur(10px);
+    background-color: #0c0c1764;
   }
   
   .navbar ul {
@@ -41,14 +38,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top:  1px solid #4a4f92;
     background-color: inherit;
     flex-wrap: wrap;
+    /* border-top:  1px solid #4a4f92; */
+    border-top: 1px solid #4a4f92;
+    backdrop-filter: blur(10px);
+    background-color: #0c0c1764;
   }
   
   @media only screen and (max-width: 768px) {
     .navbar {
       padding: 0.4rem 0.5rem;
-  
     }  
   }
