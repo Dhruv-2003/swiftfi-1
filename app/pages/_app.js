@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps }) {
       theme={darkTheme({
         accentColor: '#8585ff',  //color of wallet  try #703844
         accentColorForeground: 'black', //color of text
-        borderRadius: 'large', //rounded edges
+        borderRadius: 'small', //rounded edges
         fontStack: 'system',  
       })}
       >
