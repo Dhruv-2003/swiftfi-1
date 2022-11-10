@@ -68,7 +68,7 @@ export default function DashboardLayout({ children }) {
                   : styles.navmenu + " " + styles.active
               }
             >
-              <li className={`${styles.navLink} ${styles.small}`}>
+              <li className={`${styles.navLink}`}>
                 <ConnectButton />
               </li>
             </ul>

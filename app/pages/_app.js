@@ -8,20 +8,29 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 import "@rainbow-me/rainbowkit/styles.css";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import { getDefaultWallets, RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
+import { 
+  chain, 
+  configureChains, 
+  createClient, 
+  WagmiConfig 
+} from "wagmi";
+
 import { alchemyProvider } from "wagmi/providers/alchemy";
+
 import { publicProvider } from "wagmi/providers/public";
-import Layout from "../components/Layout";
+
 
 const { chains, provider } = configureChains(
   [chain.polygonMumbai],
   [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
 );
+
 const { connectors } = getDefaultWallets({
   appName: "My RainbowKit App",
   chains,
 });
+
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
@@ -31,7 +40,14 @@ const wagmiClient = createClient({
 function MyApp({ Component, pageProps }) {
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
+      <RainbowKitProvider chains={chains}
+      theme={darkTheme({
+        accentColor: '#8585ff',  //color of wallet  try #703844
+        accentColorForeground: 'black', //color of text
+        borderRadius: 'small', //rounded edges
+        fontStack: 'system',  
+      })}
+      >
           <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
