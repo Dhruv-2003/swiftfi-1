@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.0",
+    "@superfluid-finance/ethereum-contracts": "^1.4.2",
     "@thirdweb-dev/contracts": "^3"
   }
 }
