@@ -12,6 +12,10 @@ body {
   background-color: #0c0c17;
   color: #eaeeff;
   scroll-behavior: smooth;
+
+  /* background: linear-gradient(180deg, #FDEEFF 0%, #DBEAFF 100%); */
+
+  
 }
 
 a {
