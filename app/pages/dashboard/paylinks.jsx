@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../styles/Home.module.css";
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import DashboardLayout from "../../components/DashboardLayout.jsx";
 import { paymentRequest_data } from "../../constants/constants";
@@ -9,6 +9,13 @@ import { useAccount, useContract, useProvider, useSigner } from "wagmi";
 export default function Paylinks() {
   const [toggle, setToggle] = useState(false);
   const cancelButtonRef = useRef(null);
+
+  const [amount, setAmount] = useState(0);
+  const [payerAddress, setPayerAddress] = useState("");
+  const [payerName, setPayerName] = useState("");
+  const [message, setMessage] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
+  const [generatedLink, setGeneratedLink] = useState("");
 
   const { address, isConnected } = useAccount();
   const provider = useProvider();
@@ -20,12 +27,25 @@ export default function Paylinks() {
     signerOrProvider: signer || provider,
   });
 
+  /// upload the data to IPFS first
+  const uploadData = () => {
+    try {
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // create the paymentRequest
   const creatPaymentLink = () => {
     try {
     } catch (err) {
       console.log(err);
     }
   };
+
+  // show the request linkcreated to the user and allow them to send to the supposed address via Chat
+
+  // fetch payment Requests Created
 
   return (
     <DashboardLayout>
