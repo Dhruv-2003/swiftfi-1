@@ -1,12 +1,67 @@
 import React from "react";
 import styles from "../../styles/Home.module.css";
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import DashboardLayout from "../../components/DashboardLayout.jsx";
+import { useAccount, useSigner, useProvider, useContract } from "wagmi";
+import {
+  profileManager_data,
+  personalized_data,
+} from "../../constants/constants";
 
 export default function Paypage() {
   const [toggle, setToggle] = useState(false);
   const cancelButtonRef = useRef(null);
+
+  const [isUser, setIsUser] = useState("");
+  const [pageName, setPageName] = useState("");
+  const [domainName, setDomainName] = useState("");
+  const [description, setDescription] = useState("");
+  const [contact, setContact] = useState("");
+
+  const { address, isConnected } = useAccount();
+  const provider = useProvider();
+  const { data: signer } = useSigner();
+
+  const Profile_contract = useContract({
+    address: profileManager_data.address,
+    abi: profileManager_data.abi,
+    signerOrProvider: signer || provider,
+  });
+
+  const Personalized_contract = useContract({
+    address: personalized_data.address,
+    abi: personalized_data.abi,
+    signerOrProvider: signer || provider,
+  });
+
+  const checkUser = async () => {
+    try {
+      console.log("Checking user");
+      const data = await Profile_contract.checkUser(address);
+      console.log(data);
+      setIsUser(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const uploadData = async () => {
+    try {
+      console.log("uploading Data ...");
+      const cid = await StorePageData();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const generatePayPage = async (ipfsURI) => {
+    try {
+      const data = await Personalized_contract.createPage(pageName, ipfsURI);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <DashboardLayout>
       <div className="w-[90%] mx-auto pt-20">
@@ -35,7 +90,9 @@ export default function Paypage() {
           </div>
         </div>
 
-        <h1 className="text-center mt-8 text-2xl font-normal underline">Payment Page Logs</h1>
+        <h1 className="text-center mt-8 text-2xl font-normal underline">
+          Payment Page Logs
+        </h1>
 
         <div className="flex flex-row flex-wrap justify-center md:justify-between items-center p-2 text-md mt-2 mb-8 text-gray-200">
           {/* id */}
@@ -75,7 +132,9 @@ export default function Paypage() {
               id="countries"
               className="bg-gray-50 border w-72 md:w-64 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
-              <option value="pending" selected>Pending</option>
+              <option value="pending" selected>
+                Pending
+              </option>
               <option value="completed">Completed</option>
             </select>
           </div>
@@ -157,7 +216,6 @@ export default function Paypage() {
             </tbody>
           </table>
         </div>
-
 
         <Transition.Root show={toggle} as={Fragment}>
           <Dialog

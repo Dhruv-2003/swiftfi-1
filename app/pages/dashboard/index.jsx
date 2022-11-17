@@ -5,6 +5,7 @@ import styles from "../../styles/Home.module.css";
 import { Card } from "flowbite-react";
 import { useAccount, useSigner, useProvider, useContract } from "wagmi";
 import { profileManager_data } from "../../constants/constants";
+
 export default function DashboardHome() {
   const [account, setAccount] = useState("");
   const [isUser, setIsUser] = useState("");

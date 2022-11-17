@@ -62,6 +62,15 @@ export default function Paylinks() {
   };
 
   // show the request linkcreated to the user and allow them to send to the supposed address via Chat
+  const generateLink = (requestId) => {
+    try {
+      const URL = `https://Swiftfi.io/pay/${address}/${requestId}`;
+      console.log(URL);
+      setGeneratedLink(URL);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // fetch payment Requests Created
 
