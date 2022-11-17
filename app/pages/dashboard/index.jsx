@@ -1,17 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link.js";
 import DashboardLayout from "../../components/DashboardLayout";
 import styles from "../../styles/Home.module.css";
 import { Card } from "flowbite-react";
-
+import { useAccount, useSigner, useProvider, useContract } from "wagmi";
+import { profileManager_data } from "../../constants/constants";
 export default function DashboardHome() {
+  const [account, setAccount] = useState("");
+  const [isUser, setIsUser] = useState("");
+
+  const { address, isConnected } = useAccount();
+  const provider = useProvider();
+  const { data: signer } = useSigner();
+
+  const Profile_contract = useContract({
+    address: profileManager_data.address,
+    abi: profileManager_data.abi,
+    signerOrProvider: signer || provider,
+  });
+
+  const checkUser = async () => {
+    try {
+      console.log("Checking user");
+      const data = await Profile_contract.checkUser(address);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    if (isConnected) {
+      setAccount(address);
+    } else {
+      setAccount("Connect Wallet first");
+    }
+  }, [account]);
+
   return (
     <div>
       <DashboardLayout>
         <div className="flex flex-col justify-start pt-20">
           <h1 className="text-xl pt-3 md:pt-0 md:text-3xl font-semibold pb-8 text-center w-[95%] mx-auto">
-            gm {`0xA25c5bE1324764573dE0a14ABFe0279B4291adfA`.slice(0, 20)}....
-            welcome to your personalized SwiftFi dashboard 🚀
+            gm {`${account}`.slice(0, 10)}.... welcome to your personalized
+            SwiftFi dashboard 🚀
           </h1>
 
           <div className="">
@@ -28,7 +59,7 @@ export default function DashboardHome() {
                   Kushagra Sarathe
                 </h5>
                 <span className="text-sm font-semibold text-gray-900 dark:text-gray-400">
-                  0xA25c5bE1324764573dE0a14ABFe0279B4291adfA
+                  {account}
                 </span>
                 <div className="mt-4 flex space-x-3 lg:mt-6">
                   <a
@@ -93,7 +124,6 @@ export default function DashboardHome() {
                     </svg>
                     Verifying...
                   </button> */}
-                  
                 </div>
               </div>
             </Card>

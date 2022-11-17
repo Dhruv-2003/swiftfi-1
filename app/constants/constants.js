@@ -1,11 +1,16 @@
-const paymentRequest_Address = "";
-const payments_Address = "";
-const payoutManager_Address = "";
-const personalized_Address = "";
-const profileManager_Address = "";
-const walletVerifier_Address = "";
-const giftCardCreator_Address = "";
-const funds_Address = "";
+const paymentRequest_Address = "0x51F04D39F9EEB40A1EC7FC6b439CdA83C482fDd6";
+const payments_Address = "0xa7da0579d3967C125A91e20BEE581eAb0CC68805";
+const payoutManager_Address = "0x34C460FcEAd74eBEaC8F77d3Cf67F24d9FEF1Fda";
+const personalized_Address = "0xC1513C7F031BDE4e3952632db243459C3A413c04";
+const profileManager_Address = "0x82f8e74d48CE2f83725848F8158a1233aBEc9125";
+const walletVerifier_Address = "0xa32964d2683E2667951cEecb1Eda234336b92583";
+const giftCardCreator_Address = "0x984691E13B102F914445e1e9925Ea5925Dc83b21";
+const funds_Address = "0xF7E51F72aA8c634B9795E532Eb1b37Ff6D8FDa04";
+
+export const WEB3STORAGE_TOKEN =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDMxQjM3MjRlN2E2RjgyMTg3NEFEYzMyYjEzZDQwNjM2YkFiMDA0NzEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTg0MTc0ODY2ODksIm5hbWUiOiJDYXplIn0.BoGp0mNQc_syBHBZFj6Mb2dTUjAlpLWHd6DwCwFSc_4";
+export const NFT_STORAGE_API_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEVERWJCMEZCNTk3REI4MTUxNkU5M2Y4YmM3RjJmQ0Q2ODYzNDAyOEUiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY1ODU4MDY5OTE4MSwibmFtZSI6Ik11c2ljMyJ9.V6Ny_9VV_XLIIFDFIEG8alEdJTwxmfHJMaMDJEf00L4";
 
 import { abi as paymentRequest_ABI } from "./Artifacts/paymentRequest.sol/paymentRequests.json";
 import { abi as payments_ABI } from "./Artifacts/payments.sol/payments.json";

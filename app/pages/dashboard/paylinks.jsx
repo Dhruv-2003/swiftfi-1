@@ -5,6 +5,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import DashboardLayout from "../../components/DashboardLayout.jsx";
 import { paymentRequest_data } from "../../constants/constants";
 import { useAccount, useContract, useProvider, useSigner } from "wagmi";
+import { StoreRequests } from "../../functionality/storeRequest";
+import { ethers } from "ethers";
 
 export default function Paylinks() {
   const [toggle, setToggle] = useState(false);
@@ -28,16 +30,32 @@ export default function Paylinks() {
   });
 
   /// upload the data to IPFS first
-  const uploadData = () => {
+  const uploadData = async () => {
     try {
+      console.log("Storing the request details on IPFS ...");
+      const cid = await StoreRequests(payerName, message, amount);
+      console.log(cid);
+      const URI = `https://ipfs.io/ipfs/${cid}`;
+      creatPaymentLink(URI);
     } catch (err) {
       console.log(err);
     }
   };
 
   // create the paymentRequest
-  const creatPaymentLink = () => {
+  const creatPaymentLink = async (_requestURI) => {
     try {
+      console.log("Creating payment request from the contract ...");
+      const _amount = ethers.utils.parseEther(amount);
+      const tx = await paymentRequests_Contract.createRequest(
+        _amount,
+        _requestURI,
+        payerAddress
+      );
+
+      await tx.wait();
+      console.log(tx);
+      console.log("Request successfully created");
     } catch (err) {
       console.log(err);
     }
@@ -246,6 +264,21 @@ export default function Paylinks() {
                             Enter Details
                           </Dialog.Title>
                           <div className="flex flex-row  flex-wrap justify-center items-center p-2 text-sm mt-2  text-gray-500">
+                            <div className="w-full mt-3 flex flex-wrap items-center justify-between ">
+                              <label className="p-3" htmlFor="">
+                                Address
+                              </label>
+                              <input
+                                type="text"
+                                id="name"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[5px] focus:ring-blue-500 focus:border-blue-500 w-72 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Payers address .."
+                                required
+                                onChange={(e) => {
+                                  setPayerAddress(e.target.value);
+                                }}
+                              />
+                            </div>
                             {/* name */}
                             <div className="w-full mt-3 flex flex-wrap items-center justify-between ">
                               <label className="p-3" htmlFor="">
@@ -255,8 +288,11 @@ export default function Paylinks() {
                                 type="text"
                                 id="name"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[5px] focus:ring-blue-500 focus:border-blue-500 w-72 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Senders name..."
+                                placeholder="Payers Name .."
                                 required
+                                onChange={(e) => {
+                                  setPayerName(e.target.value);
+                                }}
                               />
                             </div>
                             {/* amount */}
@@ -270,6 +306,9 @@ export default function Paylinks() {
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[5px] focus:ring-blue-500 focus:border-blue-500 w-72 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Amount..."
                                 required
+                                onChange={(e) => {
+                                  setAmount(e.target.value);
+                                }}
                               />
                             </div>
                             {/* note */}
@@ -282,12 +321,15 @@ export default function Paylinks() {
                                 rows="2"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[5px] focus:ring-blue-500 focus:border-blue-500 w-72 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Your message..."
+                                onChange={(e) => {
+                                  setMessage(e.target.value);
+                                }}
                               ></textarea>
                             </div>
                             {/* date */}
-                            <div className="w-full mt-3 flex flex-wrap items-start justify-between">
+                            {/* <div className="w-full mt-3 flex flex-wrap items-start justify-between">
                               <label htmlFor="message" className="p-3">
-                                Note
+                                Date
                               </label>
                               <div className="relative">
                                 <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -313,7 +355,7 @@ export default function Paylinks() {
                                   placeholder="Select date"
                                 />
                               </div>
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       </div>
@@ -323,7 +365,7 @@ export default function Paylinks() {
                         type="button"
                         className={` mr-2 w-full inline-flex justify-center rounded-md border border-transparent bg-green-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm`}
                         // "inline-flex w-full justify-center rounded-md border border-transparent bg-green-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                        onClick={() => console.log("working ")}
+                        onClick={() => uploadData()}
                       >
                         Save
                       </button>

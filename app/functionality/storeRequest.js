@@ -2,7 +2,7 @@
 // customized to store a json file created from the data we enter
 import { Web3Storage } from "web3.storage";
 
-import { WEB3STORAGE_TOKEN } from "../constants";
+import { WEB3STORAGE_TOKEN } from "../constants/constants";
 function getAccessToken() {
   return WEB3STORAGE_TOKEN;
 }
@@ -11,10 +11,10 @@ function MakeStorageClient() {
   return new Web3Storage({ token: getAccessToken() });
 }
 
-export const StoreRequests = async (recieverName, info, amount) => {
+export const StoreRequests = async (payerName, message, amount) => {
   const obj = {
-    Reciever: recieverName,
-    Info: info,
+    Payer: payerName,
+    Message: message,
     Amount: amount,
   };
   const blob = new Blob([JSON.stringify(obj)], { type: "application/json" });
