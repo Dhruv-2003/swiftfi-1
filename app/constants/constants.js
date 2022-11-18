@@ -1,4 +1,4 @@
-const paymentRequest_Address = "0xc74355BF95b94A7E39929220275083989f5Df649";
+const paymentRequest_Address = "0xAB35BF389100395f9c420e07c2D2d697Eb46ef7b";
 const payments_Address = "0xa7da0579d3967C125A91e20BEE581eAb0CC68805";
 const payoutManager_Address = "0x34C460FcEAd74eBEaC8F77d3Cf67F24d9FEF1Fda";
 const personalized_Address = "0xC1513C7F031BDE4e3952632db243459C3A413c04";

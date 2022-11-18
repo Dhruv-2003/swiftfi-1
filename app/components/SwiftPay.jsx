@@ -4,14 +4,25 @@ import { Button } from "flowbite-react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
+import { useAccount, useContract, useProvider, useSigner } from "wagmi";
+import { payments_data } from "../constants/constants";
+
 export default function SwiftPay() {
   const [togglePayComponent, setTogglePayComponent] = useState(false);
-
   const [togglePayNow, setTogglePayNow] = useState(false);
   const [togglePayLater, setTogglePayLater] = useState(false);
   const [togglePayStream, setTogglePayStream] = useState(false);
   const [togglePayEMI, setTogglePayEMI] = useState(false);
   const cancelButtonRef = useRef(null);
+  const { address, isConnected } = useAccount();
+  const provider = useProvider();
+  const { data: signer } = useSigner();
+
+  const Payments_Contract = useContract({
+    address: payments_data.address,
+    abi: payments_data.abi,
+    signerOrProvider: signer || provider,
+  });
 
   return (
     <div>
