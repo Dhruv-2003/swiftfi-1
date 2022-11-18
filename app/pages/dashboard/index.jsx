@@ -9,6 +9,9 @@ import Register from "../../components/Register";
 import fetchPriceFeeds from "../../functionality/fetchPriceFeeds";
 export default function DashboardHome() {
   const [account, setAccount] = useState("");
+  const [userData, setUserData] = useState([]);
+  const [userName, setUserName] = useState("");
+  const [wallet, setWallet] = useState("");
   const [isUser, setIsUser] = useState("");
 
   const { address, isConnected } = useAccount();
@@ -26,6 +29,23 @@ export default function DashboardHome() {
       console.log("Checking user");
       const data = await Profile_contract.checkUser(address);
       console.log(data);
+      setIsUser(data);
+      if (data) {
+        fetchUser();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const fetchUser = async () => {
+    try {
+      console.log("Fetching the user Data");
+      const user = await Profile_contract.getUser(address);
+      console.log(user);
+      setUserData(user);
+      setUserName(user.name);
+      setWallet(user._wallet);
     } catch (err) {
       console.log(err);
     }
@@ -37,7 +57,7 @@ export default function DashboardHome() {
     } else {
       setAccount("Connect Wallet first");
     }
-
+    checkUser();
     fetchPriceFeeds();
   }, [account]);
 
@@ -64,10 +84,10 @@ export default function DashboardHome() {
                   alt="Bonnie image"
                 />
                 <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-                  Kushagra Sarathe
+                  {userName}
                 </h5>
                 <span className="text-sm font-semibold text-gray-900 dark:text-gray-400">
-                  {account}
+                  Wallet : {wallet}
                 </span>
                 <div className="mt-4 flex space-x-3 lg:mt-6">
                   <a
