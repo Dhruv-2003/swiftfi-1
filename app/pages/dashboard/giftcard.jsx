@@ -6,8 +6,12 @@ import Image from "next/image.js";
 import gc from "../../assets/giftcard.gif";
 import gradient from "../../assets/gc.png";
 import { useAccount, useSigner, useProvider, useContract } from "wagmi";
-import { giftCardCreator_data } from "../../constants/constants.js";
+import {
+  giftCardCreator_data,
+  giftCard_ABI,
+} from "../../constants/constants.js";
 import { StoreGiftCard } from "../../functionality/storeGiftCards";
+import { ethers } from "ethers";
 
 export default function GiftCard() {
   const { address, isConnected } = useAccount();
@@ -48,16 +52,17 @@ export default function GiftCard() {
       console.log("Creating gift Card... deploying Contracts");
       const expiry = Date.parse(validity);
       console.log(expiry);
-      const amount = "1";
+      const _amount = ethers.utils.parseEther(amount);
       const tx = await GiftCard_Contract.createGiftCard(
         receiversAddress,
         expiry,
-        _ipfsURI,
-        { value: amount }
+        _amount,
+        _ipfsURI
       );
       await tx.wait();
       console.log(tx);
       const id = tx.v;
+      getGiftCard(id);
     } catch (err) {
       console.log(err);
     }
@@ -69,6 +74,22 @@ export default function GiftCard() {
       const GiftCardNo = gcContract.slice(2, 18);
       console.log(GiftCardNo);
       setgiftCardNo(GiftCardNo);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const addBalancetoGiftCard = async (_contractAddress) => {
+    try {
+      console.log("Adding Balance ...");
+      const gcContract = new ethers.Contract(
+        _contractAddress,
+        giftCard_ABI,
+        provider
+      );
+      const _amount = ethers.utils.parseEther(amount);
+      gcContract.initialize({ value: _amount });
+      console.log("Gift Card Intialized");
     } catch (err) {
       console.log(err);
     }
