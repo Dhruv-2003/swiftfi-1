@@ -56,18 +56,19 @@ export default function SwiftPay() {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                  <div className="bg-gray-100 px-4 pt-5 pb-4 sm:p-6 sm:pb-4 sm:pl-0">
+                <Dialog.Panel className="relative transform overflow-hidden rounded-md  text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                  <div className="bg-gradient-to-r bg-inherit textw px-4 pt-5 pb-4 sm:p-6 sm:pb-4 sm:pl-0">
                     <div className="sm:flex sm:items-start ">
                       <div className="mt-3 flex flex-col justify-center items-center text-center sm:mt-0 sm:ml-4 w-full sm:text-left">
                         <Dialog.Title
                           as="h3"
-                          className="text-3xl mx-auto mt-4 font-semibold leading-6 mr-auto pl-4 text-gray-900 px-2"
+                          className="text-3xl mx-auto mt-4 font-semibold leading-6 mr-auto pl-4 text-gray-100 px-2"
                         >
-                          Select Payment Option{" "}
+                          Select Payment Option
                         </Dialog.Title>
                         <div className={`mt-4`}>
-                          <div className="flex flex-col  w-[350px] h-[350px] bg-gray-100 flex-wrap justify-center items-center px-6 py-4 rounded-md">
+                          <div className="my-2 text-center text-lg">Select from the four payment options offered by SwiftFi to complete the payment</div>
+                          <div className="flex flex-col w-[500px] h-[350px]  flex-wrap justify-center items-center px-6 py-4 rounded-md">
                             <Button
                               onClick={() => {
                                 setTogglePayNow(!togglePayNow);
@@ -109,7 +110,7 @@ export default function SwiftPay() {
                                 setTogglePayComponent(!togglePayComponent);
                               }}
                               ref={cancelButtonRef}
-                              className="w-[130px] py3 my-3"
+                              className="w-[130px] bg-red-500 hover:bg-red-600 py3 my-3"
                               // className={` mt-3 inline-flex  rounded-md border border-transparent bg-white text-black px-4 py-2 text-base font-medium shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm`}
                             >
                               Cancel
