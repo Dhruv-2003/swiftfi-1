@@ -37,6 +37,7 @@
     width: auto;
     background-position: center;
     background-repeat: no-repeat;
+    
   }
   
   .hero {
@@ -134,17 +135,6 @@
   
 
   
-  .payCard {
-    position: absolute;
-    right: 25px;
-    top: 200px;
-    transition: 0.2s ease-in-out;
-  }
-  
-  .payCard:hover {
-    transform: scale(1.02);
-  }
-  
   .align {
     display: flex;
     justify-content: center;
@@ -198,13 +188,7 @@
     .align {
       margin: 20px;
     }
-  
-    .payCard {
-      top: 260px;
-      left: auto;
-      right: auto;
-    }
-
+    
     .profileCard {
         margin: 0 auto;
         width: 90%;
