@@ -20,9 +20,9 @@ export default function SwiftPay() {
         onClick={() => {
           setTogglePayComponent(!togglePayComponent);
         }}
-        className="w-[100px] py3 my-3 rounded-sm"
+        className="w-[100px] m-2 rounded-sm"
       >
-        Pay Now
+        Pay
       </Button>
 
       {/* payment options modal */}

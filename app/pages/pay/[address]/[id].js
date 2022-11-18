@@ -30,6 +30,9 @@ export default function Id() {
           </span>{" "}
           has requested you <span className="text-lg font-semibold">$5000</span>
         </h1>
+        <div>
+        <SwiftPay/>
+      </div>
       </div>
 
       <div className="max-w-[700px] mt-[230px] md:mt-[50px]">
@@ -43,9 +46,7 @@ export default function Id() {
         </p>
       </div>
 
-      <div>
-        <SwiftPay/>
-      </div>
+      
       {/* <div className={styles.align}>
         <Phone />
       </div> */}
