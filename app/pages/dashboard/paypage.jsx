@@ -8,6 +8,7 @@ import {
   profileManager_data,
   personalized_data,
 } from "../../constants/constants";
+import { StorePageData } from "../../functionality/storePageData";
 
 export default function Paypage() {
   const [toggle, setToggle] = useState(false);
@@ -49,7 +50,16 @@ export default function Paypage() {
   const uploadData = async () => {
     try {
       console.log("uploading Data ...");
-      const cid = await StorePageData();
+      const cid = await StorePageData(
+        pageName,
+        description,
+        domainName,
+        contact
+      );
+      console.log(cid);
+      const URI = `https://ipfs.io/ipfs/${cid}`;
+
+      generatePayPage(URI);
     } catch (err) {
       console.log(err);
     }
@@ -57,11 +67,14 @@ export default function Paypage() {
 
   const generatePayPage = async (ipfsURI) => {
     try {
-      const data = await Personalized_contract.createPage(pageName, ipfsURI);
+      console.log("Generating Page address...");
+      const data = await Personalized_contract.createPage(domainName, ipfsURI);
+      console.log(data);
     } catch (err) {
       console.log(err);
     }
   };
+
   return (
     <DashboardLayout>
       <div className="w-[90%] mx-auto pt-20">
@@ -261,6 +274,24 @@ export default function Paypage() {
                             Enter Details
                           </Dialog.Title>
                           <div className="flex flex-row  flex-wrap justify-center items-center p-2 text-sm mt-2  text-gray-500">
+                            {/* DomianName */}
+                            <div className="w-full mt-3 flex flex-wrap items-center justify-between ">
+                              <label className="p-3" htmlFor="">
+                                Page Domain :
+                              </label>
+                              <input
+                                type="text"
+                                id="name"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[5px] focus:ring-blue-500 focus:border-blue-500 w-72 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Enter a domain for your page"
+                                required
+                                onChange={(e) => {
+                                  setDomainName(e.target.value);
+                                }}
+                              />
+                            </div>
+
+                            {/* Display domain example like , You pay page would be on "https://swiftfi.io/domain"  */}
                             {/* title */}
                             <div className="w-full mt-3 flex flex-wrap items-center justify-between ">
                               <label className="p-3" htmlFor="">
@@ -272,6 +303,9 @@ export default function Paypage() {
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[5px] focus:ring-blue-500 focus:border-blue-500 w-72 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Page title..."
                                 required
+                                onChange={(e) => {
+                                  setPageName(e.target.value);
+                                }}
                               />
                             </div>
 
@@ -285,6 +319,9 @@ export default function Paypage() {
                                 rows="2"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[5px] focus:ring-blue-500 focus:border-blue-500 w-72 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Page Description..."
+                                onChange={(e) => {
+                                  setDescription(e.target.value);
+                                }}
                               ></textarea>
                             </div>
 
@@ -299,6 +336,9 @@ export default function Paypage() {
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[5px] focus:ring-blue-500 focus:border-blue-500 w-72 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Enter your email..."
                                 required
+                                onChange={(e) => {
+                                  setContact(e.target.value);
+                                }}
                               />
                             </div>
 
@@ -322,7 +362,7 @@ export default function Paypage() {
                         type="button"
                         className={` mr-2 w-full inline-flex justify-center rounded-md border border-transparent bg-green-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm`}
                         // "inline-flex w-full justify-center rounded-md border border-transparent bg-green-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                        onClick={() => console.log("working ")}
+                        onClick={() => uploadData()}
                       >
                         Create
                       </button>
