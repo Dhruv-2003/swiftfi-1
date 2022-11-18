@@ -6,23 +6,104 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 import { useAccount, useContract, useProvider, useSigner } from "wagmi";
 import { payments_data } from "../constants/constants";
+import { ethers } from "ethers";
 
-export default function SwiftPay() {
+export default function SwiftPay(props) {
   const [togglePayComponent, setTogglePayComponent] = useState(false);
   const [togglePayNow, setTogglePayNow] = useState(false);
   const [togglePayLater, setTogglePayLater] = useState(false);
   const [togglePayStream, setTogglePayStream] = useState(false);
   const [togglePayEMI, setTogglePayEMI] = useState(false);
+
   const cancelButtonRef = useRef(null);
   const { address, isConnected } = useAccount();
   const provider = useProvider();
   const { data: signer } = useSigner();
+
+  const [amount, setAmount] = useState("");
+  const [receiver, setReceiver] = useState("");
+  const [sender, setSender] = useState("");
+  const [tenure, setTenure] = useState("");
 
   const Payments_Contract = useContract({
     address: payments_data.address,
     abi: payments_data.abi,
     signerOrProvider: signer || provider,
   });
+
+  useEffect(() => {
+    if (isConnected) {
+      setSender(address);
+    }
+  }, [address]);
+
+  const handlePayNow = async (_choice) => {
+    try {
+      if (_choice == 1) {
+        const _amount = ethers.utils.formatEther(amount.toString());
+        const tx = await Payments_Contract.payNow(sender, receiver, _amount, {
+          value: _amount,
+        });
+        await tx.wait();
+      } else if (_choice == 2) {
+        const _amount = ethers.utils.formatEther(amount.toString());
+        const tx = await Payments_Contract.payViaWallet(
+          sender,
+          receiver,
+          amount
+        );
+        await tx.wait();
+      } else {
+        console.log("Not a Valid Choice");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handlePayLater = async () => {
+    try {
+      console.log("Starting Pay later ...");
+      const _amount = ethers.utils.formatEther(amount.toString());
+      const time = 2592000;
+      const tx = await Payments_Contract.createPLRequest(
+        sender,
+        receiver,
+        _amount,
+        time
+      );
+      await tx.wait();
+      console.log("Pay Later started");
+      console.log(tx);
+      console.log(tx.v);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handlePayEMI = async () => {
+    try {
+      console.log("Pay EMI Started..");
+      const _amount = ethers.utils.formatEther(amount.toString());
+      const tx = await Payments_Contract.createEMI(
+        sender,
+        receiver,
+        _amount,
+        tenure
+      );
+      await tx.wait();
+      console.log("PayEMI completed");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handlePayStream = async () => {
+    try {
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
@@ -78,7 +159,10 @@ export default function SwiftPay() {
                           Select Payment Option
                         </Dialog.Title>
                         <div className={`mt-4`}>
-                          <div className="my-2 text-center text-lg">Select from the four payment options offered by SwiftFi to complete the payment</div>
+                          <div className="my-2 text-center text-lg">
+                            Select from the four payment options offered by
+                            SwiftFi to complete the payment
+                          </div>
                           <div className="flex flex-col w-[500px] h-[350px]  flex-wrap justify-center items-center px-6 py-4 rounded-md">
                             <Button
                               onClick={() => {
