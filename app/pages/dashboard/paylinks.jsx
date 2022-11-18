@@ -307,7 +307,7 @@ export default function Paylinks() {
                             {/* amount */}
                             <div className="w-full mt-3 flex flex-wrap items-start justify-between">
                               <label className="p-3" htmlFor="">
-                                Amount
+                                Amount in Matic
                               </label>
                               <input
                                 type="number"
