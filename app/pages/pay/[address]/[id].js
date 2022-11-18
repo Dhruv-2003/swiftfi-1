@@ -1,7 +1,8 @@
 import { Button } from "flowbite-react";
 import React from "react";
-import styles from "../../styles/Home.module.css";
+import styles from "../../../styles/Home.module.css";
 
+/// for payment Request
 export default function Id() {
   return (
     <div className={`${styles.bg} flex items-start justify-center flex-wrap`}>

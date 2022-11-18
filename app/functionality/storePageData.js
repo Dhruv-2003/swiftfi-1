@@ -11,11 +11,17 @@ function MakeStorageClient() {
   return new Web3Storage({ token: getAccessToken() });
 }
 
-export const StorePageData = async (payerName, message, amount) => {
+export const StorePageData = async (
+  pageName,
+  pageDescription,
+  domainName,
+  contactDetails
+) => {
   const obj = {
-    Payer: payerName,
-    Message: message,
-    Amount: amount,
+    PageName: pageName,
+    PageDescription: pageDescription,
+    Domain: domainName,
+    Contact: contactDetails,
   };
   const blob = new Blob([JSON.stringify(obj)], { type: "application/json" });
   const files = [new File([blob], "request.json")];
