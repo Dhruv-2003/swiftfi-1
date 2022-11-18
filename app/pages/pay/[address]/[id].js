@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SwiftPay from "../../../components/SwiftPay";
+import SwiftPayRequest from "../../../components/SwiftPayRequest";
 import styles from "../../../styles/Home.module.css";
 import { useRouter } from "next/dist/client/router";
 import { useAccount, useContract, useProvider, useSigner } from "wagmi";
@@ -58,6 +58,7 @@ export default function Id() {
       const request = {
         PayerName: ipfsData.Payer,
         Note: ipfsData.Message,
+        AmountinWei: data.amount,
         AmountinMatic: _amount,
         RequestId: id,
         RecieverAddress: userAddress,
@@ -126,7 +127,11 @@ export default function Id() {
           </span>
         </h1>
         <div>
-          <SwiftPay />
+          <SwiftPayRequest
+            id={requestData.RequestId}
+            address={requestData.RecieverAddress}
+            amount={requestData.AmountinWei}
+          />
         </div>
         <div className="max-w-[700px] md:mt-[50px]">
           <h1 className="text-3xl  font-semibold pb-8 text-center">
