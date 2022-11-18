@@ -3,23 +3,73 @@ import { Fragment, useRef, useState, useEffect } from "react";
 import { Button } from "flowbite-react";
 import { Dialog, Transition } from "@headlessui/react";
 import styles from "../styles/Home.module.css";
+import { useAccount, useContract, useProvider, useSigner } from "wagmi";
+import { profileManager_data } from "../constants/constants";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export default function Register() {
   const [toggle, setToggle] = useState(false);
   const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
+  const [receiverWallet, setReceiverWallet] = useState("");
+
   const cancelButtonRef = useRef(null);
+  const { address, isConnected } = useAccount();
+  const provider = useProvider();
+  const { data: signer } = useSigner();
+  const [isUser, setIsUser] = useState(false);
+
+  const Manager_contract = useContract({
+    address: profileManager_data.address,
+    abi: profileManager_data.abi,
+    signerOrProvider: signer || provider,
+  });
+
+  const checkUser = async () => {
+    try {
+      console.log("Checking user");
+      const data = await Manager_contract.checkUser(address);
+      console.log(data);
+      setIsUser(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const register = async () => {
+    try {
+      if (!isUser) {
+        console.log("Registering the user ...");
+        const tx = await Manager_contract.register(receiverWallet, name);
+        await tx.wait();
+
+        console.log(tx);
+        console.log("User registered");
+      } else {
+        console.log("User Already registered");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, [address]);
 
   return (
     <div>
-      <button
-        onClick={() => {
-          setToggle(!toggle);
-        }}
-        className={`${styles.btnSecondary} `}
-      >
-        Register
-      </button>
+      {!isUser ? (
+        <button
+          onClick={() => {
+            setToggle(!toggle);
+          }}
+          className={`${styles.btnSecondary} `}
+        >
+          Register
+        </button>
+      ) : (
+        <a>Already registered</a>
+      )}
 
       <Transition.Root show={toggle} as={Fragment}>
         <Dialog
@@ -84,7 +134,7 @@ export default function Register() {
                               <input
                                 type="text"
                                 onChange={(e) => {
-                                  setAddress(e.target.value);
+                                  setReceiverWallet(e.target.value);
                                 }}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[5px] focus:ring-blue-500 focus:border-blue-500 w-72 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Please enter wallet address..."
@@ -92,7 +142,10 @@ export default function Register() {
                               />
                             </div>
                             <div className=" w-full flex justify-around mt-4 items-center ">
-                              <Button className="w-[130px] py3 my-3">
+                              <Button
+                                className="w-[130px] py3 my-3"
+                                onClick={() => register()}
+                              >
                                 Save
                               </Button>
                               <Button
