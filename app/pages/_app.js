@@ -19,11 +19,14 @@ import {
 import { alchemyProvider } from "wagmi/providers/alchemy";
 
 import { publicProvider } from "wagmi/providers/public";
-
+import {jsonRpcProvider} from 'wagmi/providers/jsonRpc'
 
 const { chains, provider } = configureChains(
   [chain.polygonMumbai],
-  [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
+  [
+  // alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
+  jsonRpcProvider({rpc: () => ({ http: process.env.QUICK_NODE_RPC})}),
+  publicProvider()]
 );
 
 const { connectors } = getDefaultWallets({

@@ -137,7 +137,7 @@ export default function Home() {
               <div className="mt-5">
                 <a
                   target="_blank"
-                  href="https://github.com/SwiftFi"
+                  href="https://github.com/SwiftFi/SwiftFiPayPackage"
                   rel="noopener noreferrer"
                 >
                   <button className={styles.btnPrimary}>
