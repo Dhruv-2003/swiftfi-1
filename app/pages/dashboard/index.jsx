@@ -5,6 +5,7 @@ import styles from "../../styles/Home.module.css";
 import { Card } from "flowbite-react";
 import { useAccount, useSigner, useProvider, useContract } from "wagmi";
 import { profileManager_data } from "../../constants/constants";
+import Register from "../../components/Register";
 
 export default function DashboardHome() {
   const [account, setAccount] = useState("");
@@ -50,6 +51,9 @@ export default function DashboardHome() {
             <Card
               className={`${styles.profileCard} md:w-[75%] mx-auto transition hover:scale-105 ease-in-out`}
             >
+              <div className="mb-4">
+                <Register/>
+              </div>
               <div className="flex flex-col items-center pb-4 ">
                 <img
                   className="mb-3 h-24 w-24 rounded-full shadow-lg"

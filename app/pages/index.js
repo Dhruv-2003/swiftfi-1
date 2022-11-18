@@ -4,6 +4,7 @@ import Image from "next/image";
 import Layout from "../components/Layout";
 import wallet from "../assets/wallet.png";
 import Link from "next/link";
+import Register from "../components/Register";
 
 export default function Home() {
   return (
@@ -29,13 +30,18 @@ export default function Home() {
                 You can also use gift cards to send money to your loved ones or
                 the crypto card feature to pay on your favourite websites :D
               </p>
-              <div className={styles.buttons}>
-                <Link href={'/dashboard'}>
+              <div className={`flex items-center justify-start ${styles.buttons}`}>
+                <Link href={"/dashboard"}>
                   <button className={styles.btnPrimary}>Dashboard 🚀</button>
                 </Link>
-                <a target="_blank" href='https://github.com/SwiftFi' rel="noopener noreferrer">
-                  <button className={styles.btnSecondary}>Github 😎</button>
-                </a>
+                {/* <a
+                  target="_blank"
+                  href="https://github.com/SwiftFi"
+                  rel="noopener noreferrer"
+                > */}
+                  <Register />
+                  {/* <button className={styles.btnSecondary}>Github 😎</button> */}
+                {/* </a> */}
               </div>
             </div>
             <div className={styles.right}>
