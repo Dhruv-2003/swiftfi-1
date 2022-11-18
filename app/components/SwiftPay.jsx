@@ -172,7 +172,7 @@ export default function SwiftPay() {
                             className={` flex flex-col items-center justify-center w-full text-center rounded-md mt-2 p-2`}
                           >
                             <div
-                              className={`${`text-center w-36 mr-auto font-semibold max-h-[40px] overflow-hidden rounded-md p-2 bg-gray-900 text-white`}`}
+                              className={`${`text-center w-36 mr-auto font-semibold max-h-[100px] overflow-hidden rounded-md p-2 bg-gray-900 text-white`}`}
                             >
                               <ConnectButton />
                             </div>
@@ -267,7 +267,7 @@ export default function SwiftPay() {
                             className={` flex flex-col items-center justify-center w-full text-center rounded-md mt-2 p-2`}
                           >
                             <div
-                              className={`${`text-center w-36 mr-auto font-semibold max-h-[40px] overflow-hidden rounded-md p-2 bg-gray-900 text-white`}`}
+                              className={`${`text-center w-36 mr-auto font-semibold max-h-[100px] overflow-hidden rounded-md p-2 bg-gray-900 text-white`}`}
                             >
                               <ConnectButton />
                             </div>
@@ -363,7 +363,7 @@ export default function SwiftPay() {
                             className={` flex flex-col items-center justify-center w-full text-center rounded-md mt-2 p-2`}
                           >
                             <div
-                              className={` ${`text-center  mr-auto font-semibold max-h-[40px] overflow-hidden rounded-md p-2 bg-gray-900 text-white`}`}
+                              className={` ${`text-center  mr-auto font-semibold max-h-[100px] overflow-hidden rounded-md p-2 bg-gray-900 text-white`}`}
                             >
                               <ConnectButton />
                             </div>
@@ -482,7 +482,7 @@ export default function SwiftPay() {
                             className={` flex flex-col items-center justify-center w-full text-center rounded-md mt-2 p-2`}
                           >
                             <div
-                              className={` ${`text-center  mr-auto font-semibold max-h-[40px] overflow-hidden rounded-md p-2 bg-gray-900 text-white`}`}
+                              className={` ${`text-center  mr-auto font-semibold max-h-[100px] overflow-hidden rounded-md p-2 bg-gray-900 text-white`}`}
                             >
                               <ConnectButton />
                             </div>
