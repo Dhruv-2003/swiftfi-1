@@ -1,17 +1,86 @@
 import Link from "next/link.js";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import DashboardLayout from "../../components/DashboardLayout.jsx";
 import { Label, TextInput, Checkbox, Button } from "flowbite-react";
 import Image from "next/image.js";
 import gc from "../../assets/giftcard.gif";
 import gradient from "../../assets/gc.png";
+import { useAccount, useSigner, useProvider, useContract } from "wagmi";
+import { giftCardCreator_data } from "../../constants/constants.js";
+import { StoreGiftCard } from "../../functionality/storeGiftCards";
 
 export default function GiftCard() {
+  const { address, isConnected } = useAccount();
+  const provider = useProvider();
+  const { data: signer } = useSigner();
+  const [name, setName] = useState("");
+  const [receiversAddress, setReceiversAddress] = useState("");
+  const [amount, setamount] = useState(0);
+  const [note, setNote] = useState("");
+  const [validity, setValidity] = useState("");
+  const [giftCardNo, setgiftCardNo] = useState("");
+  const GiftCard_Contract = useContract({
+    address: giftCardCreator_data.address,
+    abi: giftCardCreator_data.abi,
+    signerOrProvider: signer || provider,
+  });
+
+  const uploadData = async () => {
+    try {
+      console.log("Uploading Data ...");
+      const cid = await StoreGiftCard(
+        name,
+        amount,
+        note,
+        receiversAddress,
+        validity
+      );
+      console.log(cid);
+      const URI = `https://ipfs.io/ipfs/${cid}`;
+      createGiftCard(URI);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const createGiftCard = async (_ipfsURI) => {
+    try {
+      console.log("Creating gift Card... deploying Contracts");
+      const expiry = Date.parse(validity);
+      console.log(expiry);
+      const amount = "1";
+      const tx = await GiftCard_Contract.createGiftCard(
+        receiversAddress,
+        expiry,
+        _ipfsURI,
+        { value: amount }
+      );
+      await tx.wait();
+      console.log(tx);
+      const id = tx.v;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getGiftCard = async (_gcID) => {
+    try {
+      const gcContract = await GiftCard_Contract.getGcContractAddress(_gcID);
+      const GiftCardNo = gcContract.slice(2, 18);
+      console.log(GiftCardNo);
+      setgiftCardNo(GiftCardNo);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <DashboardLayout>
       <div className="w-[90%] mx-auto pt-20">
         <div className="flex flex-col justify-start pt-5 pb-10">
-          <h1 className="text-3xl font-semibold ml-3 pb-6 text-center">Gift Card</h1>
+          <h1 className="text-3xl font-semibold ml-3 pb-6 text-center">
+            Gift Card
+          </h1>
 
           {/* ${styles.gradient} */}
           <div
@@ -36,6 +105,9 @@ export default function GiftCard() {
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[5px] focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Receivers name..."
                       required
+                      onChange={(e) => {
+                        setName(e.target.value);
+                      }}
                     />
                   </div>
 
@@ -50,6 +122,9 @@ export default function GiftCard() {
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[5px] focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
                       placeholder="Receivers wallet address..."
                       required
+                      onChange={(e) => {
+                        setReceiversAddress(e.target.value);
+                      }}
                     />
                   </div>
 
@@ -64,6 +139,9 @@ export default function GiftCard() {
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[5px] focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Amount in USD..."
                       required
+                      onChange={(e) => {
+                        setamount(e.target.value);
+                      }}
                     />
                   </div>
 
@@ -77,6 +155,9 @@ export default function GiftCard() {
                       rows="5"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[5px] focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Special message for receiver..."
+                      onChange={(e) => {
+                        setNote(e.target.value);
+                      }}
                     ></textarea>
                   </div>
 
@@ -106,6 +187,9 @@ export default function GiftCard() {
                         type="date"
                         className="bg-gray-50 w-full  border border-gray-300 text-gray-900 sm:text-sm rounded-[5px] focus:ring-blue-500 focus:border-blue-500 block pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Select date"
+                        onChange={(e) => {
+                          setValidity(e.target.value);
+                        }}
                       />
                     </div>
                   </div>
@@ -117,7 +201,11 @@ export default function GiftCard() {
 
                   {/* button */}
                   <div className="w-full mt-4 flex flex-wrap items-start justify-between">
-                    <Button className="w-full" type="submit">
+                    <Button
+                      className="w-full"
+                      type="submit"
+                      onClick={() => uploadData()}
+                    >
                       Submit
                     </Button>
                   </div>
