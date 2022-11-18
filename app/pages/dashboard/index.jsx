@@ -6,7 +6,7 @@ import { Card } from "flowbite-react";
 import { useAccount, useSigner, useProvider, useContract } from "wagmi";
 import { profileManager_data } from "../../constants/constants";
 import Register from "../../components/Register";
-import fetchPriceFeeds from "../../functionality/fetchPriceFeeds";
+
 export default function DashboardHome() {
   const [account, setAccount] = useState("");
   const [userData, setUserData] = useState([]);
@@ -58,7 +58,6 @@ export default function DashboardHome() {
       setAccount("Connect Wallet first");
     }
     checkUser();
-    fetchPriceFeeds();
   }, [account]);
 
   return (

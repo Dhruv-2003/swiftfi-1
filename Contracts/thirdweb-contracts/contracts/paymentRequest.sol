@@ -87,7 +87,7 @@ contract paymentRequests is Ownable {
     }
 
     /// mapping from creator Address =>  requestID => PaymentRequest Details
-    mapping(address => mapping(uint256 => PaymentRequest)) private requests;
+    mapping(address => mapping(uint256 => PaymentRequest)) public requests;
 
     /// just to find the max for request for each address
     mapping(address => uint256) public totalRequests;
@@ -126,7 +126,7 @@ contract paymentRequests is Ownable {
         uint256 _amount,
         string memory _detailsURI,
         address payer
-    ) public onlyUser returns (uint256 id) {
+    ) public returns (uint256 id) {
         require(_amount > 0, "Amount should be greater than 0");
         uint256 _id = totalRequests[msg.sender];
         requests[msg.sender][_id] = PaymentRequest(
