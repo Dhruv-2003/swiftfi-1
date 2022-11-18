@@ -12,6 +12,7 @@ import { fetchIPFS } from "../../../functionality/fetchIPFS";
 import { ethers } from "ethers";
 import { fetchPriceFeeds } from "../../../functionality/fetchPriceFeeds";
 /// for payment Request
+
 export default function Id() {
   const [userAddress, setUserAddress] = useState("");
   const [details, setdetails] = useState({});
@@ -81,7 +82,6 @@ export default function Id() {
   };
 
   useEffect(() => {
-    console.log("it worked ");
     setUserAddress(_address);
     setId(_id);
     console.log(_id, _address);
@@ -90,9 +90,9 @@ export default function Id() {
     }
   }, [_id]);
 
-  useEffect(async () => {
-    // convertUSDtoMatic(amountMatic);
-  }, [amountMatic]);
+  // useEffect(async () => {
+  //   // convertUSDtoMatic(amountMatic);
+  // }, [amountMatic]);
 
   return (
     <div
