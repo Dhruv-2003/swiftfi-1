@@ -134,7 +134,8 @@ export default function Home() {
                 Website with just few lines of Code and provide seemless
                 experience of paying via crypto to your users.
               </div>
-              <div className="mt-5">
+              <div className="my-5 mx-3 md:mx-0
+              ">
                 <a
                   target="_blank"
                   href="https://github.com/SwiftFi/SwiftFiPayPackage"
@@ -147,6 +148,73 @@ export default function Home() {
                 </a>
               </div>
             </div>
+          </div>
+
+          <div>
+            <main className={styles.features_main}>
+              <section className={styles.features_section}>
+                <h1 className={styles.section__title}>
+                  <span>SwiftFi Features</span>
+                </h1>
+                <p className={styles.section__desc}>
+                  SwiftFi offers variety of features to help you make and manage
+                  payments easily. We have planned to release a complete banking
+                  suite that can be used widely help us all take web3 one-step closer to mass adoption
+                </p>
+                <div className={styles.features}>
+                  <div className={`${styles.feature} ${styles.feature_one}`}>
+                    <h2 className={styles.feature__title}>Payment Links</h2>
+                    <p className={styles.feature__desc}>
+                      You can generate unique payment links directlyfrom the dashboard and use them to receive funds in the wallet of your choice. SwiftFi also offers a in-built wallet
+                    </p>
+                    <img
+                      className={styles.feature__img}
+                      src="https://kellychi22.github.io/frontend-mentor-solutions/10-four-card-feature-section/images/icon-supervisor.svg"
+                      alt=""
+                    />
+                  </div>
+                  <div className={styles.wrapper}>
+                    <div className={`${styles.feature} ${styles.feature_two}`}>
+                      <h2 className={styles.feature__title}>
+                        SwiftFi-Pay Node Package
+                      </h2>
+                      <p className={styles.feature__desc}>
+                       A Node package to help you built payment features in your applications easily
+                      </p>
+                      <img
+                        className={styles.feature__img}
+                        src="https://kellychi22.github.io/frontend-mentor-solutions/10-four-card-feature-section/images/icon-team-builder.svg"
+                        alt=""
+                      />
+                    </div>
+                    <div
+                      className={`${styles.feature} ${styles.feature_three}`}
+                    >
+                      <h2 className={styles.feature__title}>Gift Cards</h2>
+                      <p className={styles.feature__desc}>
+                        Claimable crytpo gift cards to that you can send to anyone in the world
+                      </p>
+                      <img
+                        className={styles.feature__img}
+                        src="https://kellychi22.github.io/frontend-mentor-solutions/10-four-card-feature-section/images/icon-karma.svg"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                  <div className={`${styles.feature} ${styles.feature_four}`}>
+                    <h2 className={styles.feature__title}>Payment Pages</h2>
+                    <p className={styles.feature__desc}>
+                      Payment pages to help you generate new pages directly using SwiftFi and receive money with ease
+                    </p>
+                    <img
+                      className={styles.feature__img}
+                      src="https://kellychi22.github.io/frontend-mentor-solutions/10-four-card-feature-section/images/icon-calculator.svg"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </section>
+            </main>
           </div>
         </div>
       </Layout>
