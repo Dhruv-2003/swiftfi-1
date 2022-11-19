@@ -33,10 +33,10 @@ const menuItems = [
     href: "/dashboard/paysplit",
     title: "Payment Splitter",
   },
-  {
-    href: "/dashboard/directpay",
-    title: "Direct Pay",
-  },
+  // {
+  //   href: "/dashboard/directpay",
+  //   title: "Direct Pay",
+  // },
 ];
 
 export default function DashboardLayout({ children }) {
