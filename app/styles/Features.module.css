@@ -38,19 +38,24 @@
 }
 .tariffCards > div h3 {
   position: absolute;
-  bottom: 60px;
+  top: 30%;
+  /* text-align: center; */
   color: black;
-  left: 15px;
+  padding: 0 20px;
+  /* left: 15px; */
   font-size: 18px;
   font-weight: 800;
 }
 .tariffCards > div span {
   position: absolute;
   font-weight: 500;
-  bottom: 15px;
+  padding: 0 20px;
+  top: 50%;
+
+  /* bottom: 15px; */
   color: black;
 
-  left: 15px;
+  /* left: 15px; */
   font-size: 14px;
   font-weight: 600;
   opacity: 0.9;

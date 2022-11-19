@@ -62,36 +62,36 @@ export default function Home() {
                 className={`  my-20 sm:my-20 lg:my-0 hover:scale-110 transition-transform ease-in-out ${styles2.tariffCards}`}
               >
                 <div className={styles2.economy}>
-                  <Image
+                  {/*<Image
                     className=" mx-auto w-fit top"
                     src={poly}
                     alt="eth"
                     height="150"
-                  />
+                  />*/ }
                   <h3>Create Unique Payment Links</h3>
                   <span>
                     Receive payments easily by setting up unique payment links{" "}
                   </span>
                 </div>
                 <div className={styles2.premiumeconomy}>
-                  <Image
+                  {/*<Image
                     className=" mx-auto w-fit top"
                     src={poly}
                     alt="eth"
                     height="150"
-                  />
+                  />*/ }
                   <h3>Send Gift Cards</h3>
                   <span>
                     Create Gift Cards and send them to your loved ones
                   </span>
                 </div>
                 <div className={styles2.business}>
-                  <Image
+                  {/*<Image
                     className=" mx-auto w-fit top"
                     src={poly}
                     alt="eth"
                     height="150"
-                  />
+                  />*/ }
                   <h3>Cretae Unique Payment Pages </h3>
                   <span>
                     Create payment pages easily for special events and recieve
@@ -99,12 +99,12 @@ export default function Home() {
                   </span>
                 </div>
                 <div className={styles2.first}>
-                  <Image
+                  {/*<Image
                     className=" mx-auto w-fit top"
                     src={poly}
                     alt="eth"
                     height="150"
-                  />
+                  />*/ }
                   <h3>Choose b/w 4 Options</h3>
                   <span>
                     SwiftFi offers you options like Pay Now, Pay Later, Pay EMI,
