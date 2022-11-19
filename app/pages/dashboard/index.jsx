@@ -167,64 +167,36 @@ export default function DashboardHome() {
                   </u>
                 </h2>
                 <span className="">
-                  Start receiving payments using unique and personalized payment
-                  links and get paid in quickly
+                  Receive payments personalized payment
+                  links and get paid in easily
                 </span>
               </div>
 
               <div className=" md:max-w-[550px] w-[90%] transition text-[#140f21] hover:ease-in-out hover:scale-105 bg-[#8585ff] border border-[#ffffff2e] p-4 mx-4 my-3 rounded-sm text-start">
                 <h2 className="text-xl font-semibold pb-2">
                   <u>
-                    <Link href={"/dashboard/verifywallet"}>
-                      Wallet Verification
+                    <Link href={"/dashboard/transactions"}>
+                      Manage Transactions
                     </Link>
                   </u>
                 </h2>
                 <span className="">
-                  Verify any wallet using this feature and check if that wallet
-                  is compromised or not
+                  View and manage all the transactions in the transactions page
                 </span>
               </div>
 
               <div className=" md:max-w-[550px] w-[90%] transition text-[#140f21] hover:ease-in-out hover:scale-105 bg-[#8585ff] border border-[#ffffff2e] p-4 mx-4 my-3 rounded-sm text-start">
                 <h2 className="text-xl font-semibold pb-2">
                   <u>
-                    <Link href={"/dashboard/invest"}>Invest</Link>
+                    <Link href={"/dashboard/invest"}>Gift Card</Link>
                   </u>
                 </h2>
                 <span className="">
-                  Invest the funds you receive directly through the platform in
-                  various ways
+                  Send claimable crypto gift cards to your favorite people
                 </span>
               </div>
 
-              <div className=" md:max-w-[550px] w-[90%] transition text-[#140f21] hover:ease-in-out hover:scale-105 bg-[#8585ff] border border-[#ffffff2e] p-4 mx-4 my-3 rounded-sm text-start">
-                <h2 className="text-xl font-semibold pb-2">
-                  <u>
-                    <Link href={"/dashboard/verifywallet"}>
-                      Wallet Verification
-                    </Link>
-                  </u>
-                </h2>
-                <span className="">
-                  Verify any wallet using this feature and check if that wallet
-                  is compromised or not
-                </span>
-              </div>
-
-              <div className=" md:max-w-[550px] w-[90%] transition text-[#140f21] hover:ease-in-out hover:scale-105 bg-[#8585ff] border border-[#ffffff2e] p-4 mx-4 my-3 rounded-sm text-start">
-                <h2 className="text-xl font-semibold pb-2">
-                  <u>
-                    <Link href={"/dashboard/verifywallet"}>
-                      Wallet Verification
-                    </Link>
-                  </u>
-                </h2>
-                <span className="">
-                  Verify any wallet using this feature and check if that wallet
-                  is compromised or not
-                </span>
-              </div>
+            
             </div>
           </div>
         </div>
