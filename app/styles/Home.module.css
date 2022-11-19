@@ -100,9 +100,13 @@
   margin-bottom: 50px;
 } */
 
-/* .features {
-  max-width: 600px;
-} */
+.features {
+  background: url('../assets/hero2.gif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  /* max-width: 600px; */
+}
 
 .gradientBox {
 
@@ -355,7 +359,7 @@
   }
 
   .features {
-    padding-bottom: 2rem;
+    /* padding-bottom: 2rem; */
   }
 
   .gradientBox {
