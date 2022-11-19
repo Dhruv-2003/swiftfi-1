@@ -3,10 +3,7 @@ import SwiftPay from "../../../components/SwiftPay";
 import styles from "../../../styles/Home.module.css";
 import { useRouter } from "next/dist/client/router";
 import { useAccount, useContract, useProvider, useSigner } from "wagmi";
-import {
-  payments_data,
-  paymentRequest_data,
-} from "../../../constants/constants";
+import { payments_data, personalized_data } from "../../../constants/constants";
 
 export default function Home() {
   const [userAddress, setUserAddress] = useState("");
@@ -16,8 +13,6 @@ export default function Home() {
 
   const router = useRouter();
   const _address = router.query.address;
-  const _id = router.query.id;
-
   const { address, isConnected } = useAccount();
   const provider = useProvider();
   const { data: signer } = useSigner();
@@ -28,28 +23,9 @@ export default function Home() {
     signerOrProvider: signer || provider,
   });
 
-  const PaymentsRequest_Contract = useContract({
-    address: paymentRequest_data.address,
-    abi: paymentRequest_data.abi,
-    signerOrProvider: signer || provider,
-  });
-
-  const fetchRequest = async (address_, id_) => {
-    try {
-      console.log("Fetching the request");
-      const data = await PaymentsRequest_Contract.getRequest(address_, id_);
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
     console.log("it worked ");
     setUserAddress(_address);
-    setRequestId(_id);
-    console.log(_id, _address);
-    fetchRequest(_address, _id);
   }, [_id]);
 
   return (
