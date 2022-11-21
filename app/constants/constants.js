@@ -1,11 +1,11 @@
-const paymentRequest_Address = "0xAB35BF389100395f9c420e07c2D2d697Eb46ef7b";
-const payments_Address = "0xa7da0579d3967C125A91e20BEE581eAb0CC68805";
-const payoutManager_Address = "0x34C460FcEAd74eBEaC8F77d3Cf67F24d9FEF1Fda";
-const personalized_Address = "0xC1513C7F031BDE4e3952632db243459C3A413c04";
-const profileManager_Address = "0x82f8e74d48CE2f83725848F8158a1233aBEc9125";
-const walletVerifier_Address = "0xa32964d2683E2667951cEecb1Eda234336b92583";
-const giftCardCreator_Address = "0x984691E13B102F914445e1e9925Ea5925Dc83b21";
-const funds_Address = "0xF7E51F72aA8c634B9795E532Eb1b37Ff6D8FDa04";
+const paymentRequest_Address = "0x6Dc77D90E691645e17EA959718c1b6dadDB87A2A";
+const payments_Address = "0x963034fC15b81F70a416F6c095F55aa73760634e";
+const payoutManager_Address = "0x03057B79841Ac3b79dd21e12dd69Ca45b7639782";
+const personalized_Address = "0x16E661CeE4Dc280900E89A0E0F1C78c482D22702";
+const profileManager_Address = "0x4307f4CfCcd2e3f8697EF2C1B5c91291AA58fFAb";
+const walletVerifier_Address = "0x39813f50a9Ac1b1201EF7c32B80c78CD9fE8b46f";
+const giftCardCreator_Address = "0x37fE5cB2FFF0ebBdab69AdC5A4EcE3Cb8C311A0d";
+const funds_Address = "0x6471f348e7d4ea254b053779c82cc593F4e51A9c";
 
 export const WEB3STORAGE_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDMxQjM3MjRlN2E2RjgyMTg3NEFEYzMyYjEzZDQwNjM2YkFiMDA0NzEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTg0MTc0ODY2ODksIm5hbWUiOiJDYXplIn0.BoGp0mNQc_syBHBZFj6Mb2dTUjAlpLWHd6DwCwFSc_4";

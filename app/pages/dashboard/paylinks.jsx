@@ -7,7 +7,6 @@ import { paymentRequest_data } from "../../constants/constants";
 import { useAccount, useContract, useProvider, useSigner } from "wagmi";
 import { StoreRequests } from "../../functionality/storeRequest";
 import { ethers } from "ethers";
-import fetchPriceFeeds from "../../functionality/fetchPriceFeeds";
 
 export default function Paylinks() {
   const [toggle, setToggle] = useState(false);

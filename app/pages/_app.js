@@ -20,14 +20,28 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
-const { chains, provider } = configureChains(
-  [chain.polygonMumbai],
-  [
-    // alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
-    // jsonRpcProvider({rpc: () => ({ http: process.env.QUICK_NODE_RPC})}),
-    publicProvider(),
-  ]
-);
+const auroraChain = {
+  id: 1313161555,
+  name: "Aurora-Testnet",
+  network: "Aurora-Testnet",
+  nativeCurrency: {
+    decimals: 18,
+    name: "ETHER",
+    symbol: "ETH",
+  },
+  rpcUrls: {
+    default: "https://testnet.aurora.dev",
+  },
+  blockExplorers: {
+    default: {
+      name: "AuroraScan Testnet",
+      url: "https://testnet.aurorascan.dev",
+    },
+  },
+  testnet: true,
+};
+
+const { chains, provider } = configureChains([auroraChain], [publicProvider()]);
 
 const { connectors } = getDefaultWallets({
   appName: "My RainbowKit App",
