@@ -4,7 +4,7 @@ const payoutManager_Address = "0x34C460FcEAd74eBEaC8F77d3Cf67F24d9FEF1Fda";
 const personalized_Address = "0xC1513C7F031BDE4e3952632db243459C3A413c04";
 const profileManager_Address = "0x82f8e74d48CE2f83725848F8158a1233aBEc9125";
 const walletVerifier_Address = "0xa32964d2683E2667951cEecb1Eda234336b92583";
-const giftCardCreator_Address = "0x8F84c6343A2230B7f6a5D1D81B546d2f669D5697";
+const giftCardCreator_Address = "0x984691E13B102F914445e1e9925Ea5925Dc83b21";
 const funds_Address = "0xF7E51F72aA8c634B9795E532Eb1b37Ff6D8FDa04";
 
 export const WEB3STORAGE_TOKEN =

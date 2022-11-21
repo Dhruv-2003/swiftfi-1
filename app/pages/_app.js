@@ -1,32 +1,32 @@
 import "../styles/globals.css";
-import Router from 'next/router';
-import NProgress from 'nprogress'; //nprogress module
-import 'nprogress/nprogress.css'; //styles of nprogress
+import Router from "next/router";
+import NProgress from "nprogress"; //nprogress module
+import "nprogress/nprogress.css"; //styles of nprogress
 
-Router.events.on('routeChangeStart', () => NProgress.start()); 
-Router.events.on('routeChangeComplete', () => NProgress.done()); 
-Router.events.on('routeChangeError', () => NProgress.done());
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
 import "@rainbow-me/rainbowkit/styles.css";
-import { getDefaultWallets, RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
-import { 
-  chain, 
-  configureChains, 
-  createClient, 
-  WagmiConfig 
-} from "wagmi";
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+  darkTheme,
+} from "@rainbow-me/rainbowkit";
+import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 
 import { alchemyProvider } from "wagmi/providers/alchemy";
 
 import { publicProvider } from "wagmi/providers/public";
-import {jsonRpcProvider} from 'wagmi/providers/jsonRpc'
+import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
 const { chains, provider } = configureChains(
   [chain.polygonMumbai],
   [
-  // alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
-  jsonRpcProvider({rpc: () => ({ http: process.env.QUICK_NODE_RPC})}),
-  publicProvider()]
+    // alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
+    // jsonRpcProvider({rpc: () => ({ http: process.env.QUICK_NODE_RPC})}),
+    publicProvider(),
+  ]
 );
 
 const { connectors } = getDefaultWallets({
@@ -43,15 +43,16 @@ const wagmiClient = createClient({
 function MyApp({ Component, pageProps }) {
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}
-      theme={darkTheme({
-        accentColor: '#8585ff',  //color of wallet  try #703844
-        accentColorForeground: 'black', //color of text
-        borderRadius: 'small', //rounded edges
-        fontStack: 'system',  
-      })}
+      <RainbowKitProvider
+        chains={chains}
+        theme={darkTheme({
+          accentColor: "#8585ff", //color of wallet  try #703844
+          accentColorForeground: "black", //color of text
+          borderRadius: "small", //rounded edges
+          fontStack: "system",
+        })}
       >
-          <Component {...pageProps} />
+        <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
   );

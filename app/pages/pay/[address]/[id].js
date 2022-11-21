@@ -42,7 +42,7 @@ export default function Id() {
 
   // const amountinUSD = fetchPriceFeeds(requestData.AmountinMatic);
 
-  const fetchRequest = async (address_, id_) => {
+  const fetchRequest = async (id_, address_) => {
     try {
       console.log("Fetching the request");
       const data = await PaymentsRequest_Contract.getRequest(id_, address_);
@@ -87,7 +87,7 @@ export default function Id() {
     setId(_id);
     console.log(_id, _address);
     if (_id) {
-      fetchRequest(_address, _id);
+      fetchRequest(_id, _address);
     }
   }, [_id]);
 
