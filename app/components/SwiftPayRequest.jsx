@@ -37,6 +37,13 @@ export default function SwiftPayRequest(props) {
     signerOrProvider: signer || provider,
   });
 
+  useEffect(() => {
+    setUserAddress(props.address);
+    setrequestId(props.id);
+    setAmount(props.amount);
+    console.log(props.id, props.address, props.amount);
+  }, []);
+
   const handlePayNow = async (_choice) => {
     try {
       console.log("Paying Now");
@@ -108,13 +115,6 @@ export default function SwiftPayRequest(props) {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    setUserAddress(props.address);
-    setrequestId(props.id);
-    setAmount(props.amount);
-    console.log(props.id, props.address, props.amount);
-  }, []);
 
   return (
     <div>

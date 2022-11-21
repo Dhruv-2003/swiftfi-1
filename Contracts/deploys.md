@@ -1,4 +1,4 @@
-## Mumbai
+## Aurora Testnet
 
 Payout Manager: 0x03057B79841Ac3b79dd21e12dd69Ca45b7639782 ,
 
